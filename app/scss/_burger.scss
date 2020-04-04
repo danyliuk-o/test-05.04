@@ -1,0 +1,106 @@
+.burger-menu {
+    display: none;
+    &_button {
+        position: relative;
+        z-index: 30;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.05);
+        transition: 0.4s;
+        display: block;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            .burger-menu_lines {
+                filter: brightness(0.7);
+            }
+        }
+    }
+}
+
+.burger-menu_lines::before,
+.burger-menu_lines::after,
+.burger-menu_lines {
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: $linkColor;
+    transition: 0.4s;
+}
+.burger-menu_lines {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.burger-menu_lines::before {
+    content: "";
+    top: -8px;
+}
+.burger-menu_lines::after {
+    content: "";
+    top: 8px;
+}
+
+.burger-menu_active .burger-menu_lines {
+    background-color: transparent;
+    &::before {
+        top: 0;
+        transform: rotate(45deg);
+    }
+    &::after {
+        top: 0;
+        transform: rotate(-45deg);
+    }
+}
+
+.burger-menu_nav {
+    padding-top: 120px;
+    position: fixed;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    background-color: #fff;
+    overflow-y: auto;
+    right: -100%;
+    transition: 0.8s;
+}
+.burger-menu_active .burger-menu_nav {
+    right: 0;
+    transition: 0.4s;
+}
+.burger-menu_link {
+    padding: 18px 35px;
+    font-family: "Roboto Regular", sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: 400;
+    color: $linkColor;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+    &:hover {
+        filter: brightness(0.95);
+    }
+}
+
+.burger-menu_overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+}
+.burger-menu_active .burger-menu_overlay {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+body.locked {
+    overflow: hidden;
+}
